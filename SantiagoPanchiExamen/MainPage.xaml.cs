@@ -9,6 +9,7 @@ namespace SantiagoPanchiExamen
         public MainPage()
         {
             InitializeComponent();
+            LoadLastRecarga();
         }
 
         private async void OnRecargaButtonClicked(object sender, EventArgs e)
@@ -22,24 +23,54 @@ namespace SantiagoPanchiExamen
                 return;
             }
 
-            // Aquí se genera el nombre del archivo basado en el nombre y apellido del usuario
-            string fileName = $"{nombre.Replace(" ", "")}.txt"; // Ejemplo: SantiagoPanchi.txt
-            string recargaInfo = $"Nombre: {nombre}\nTeléfono: {telefono}\nFecha: {DateTime.Now}";
-            string filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
+            string recargaInfo = $"Nombre: {nombre}\nTeléfono: {telefono}\nFecha: {DateTime.Now}\n";
 
-            // Guardar información en el archivo
-            File.WriteAllText(filePath, recargaInfo);
+            string filePath = Path.Combine(FileSystem.AppDataDirectory, "recargas.txt");
+            File.AppendAllText(filePath, recargaInfo);
 
-            // Mostrar mensaje de éxito
             await DisplayAlert("Éxito", "Recarga realizada exitosamente", "OK");
 
-            // Recargar la página
-            await Navigation.PushAsync(new MainPage());
-
-            // Mostrar última recarga
-            lastRecargaLabel.Text = $"Última recarga: {recargaInfo}";
+            lastRecargaLabel.Text = $"Última recarga:\n{recargaInfo}";
             lastRecargaLabel.IsVisible = true;
+
+            LoadAllRecargas();
+        }
+
+        private void LoadLastRecarga()
+        {
+            string filePath = Path.Combine(FileSystem.AppDataDirectory, "recargas.txt");
+
+            if (File.Exists(filePath))
+            {
+                string allRecargas = File.ReadAllText(filePath);
+                lastRecargaLabel.Text = $"Última recarga:\n{allRecargas}";
+                lastRecargaLabel.IsVisible = true;
+            }
+            else
+            {
+                lastRecargaLabel.Text = "No hay recargas anteriores.";
+                lastRecargaLabel.IsVisible = false;
+            }
+        }
+
+        private void LoadAllRecargas()
+        {
+            string filePath = Path.Combine(FileSystem.AppDataDirectory, "recargas.txt");
+
+            if (File.Exists(filePath))
+            {
+                string allRecargas = File.ReadAllText(filePath);
+                lastRecargaLabel.Text = $"Historial de recargas:\n{allRecargas}";
+                lastRecargaLabel.IsVisible = true;
+            }
+            else
+            {
+                lastRecargaLabel.Text = "No hay recargas anteriores.";
+                lastRecargaLabel.IsVisible = false;
+            }
         }
     }
 }
+
+
 
