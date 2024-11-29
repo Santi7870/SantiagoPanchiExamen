@@ -25,42 +25,26 @@ namespace SantiagoPanchiExamen
 
             string recargaInfo = $"Nombre: {nombre}\nTeléfono: {telefono}\nFecha: {DateTime.Now}\n";
 
-            string filePath = Path.Combine(FileSystem.AppDataDirectory, "recargas.txt");
-            File.AppendAllText(filePath, recargaInfo);
+            string filePath = Path.Combine(FileSystem.AppDataDirectory, "recarga.txt");
+            File.WriteAllText(filePath, recargaInfo);
 
             await DisplayAlert("Éxito", "Recarga realizada exitosamente", "OK");
 
+            nameEntry.Text = string.Empty;
+            phoneEntry.Text = string.Empty;
+
             lastRecargaLabel.Text = $"Última recarga:\n{recargaInfo}";
             lastRecargaLabel.IsVisible = true;
-
-            LoadAllRecargas();
         }
 
         private void LoadLastRecarga()
         {
-            string filePath = Path.Combine(FileSystem.AppDataDirectory, "recargas.txt");
+            string filePath = Path.Combine(FileSystem.AppDataDirectory, "recarga.txt");
 
             if (File.Exists(filePath))
             {
-                string allRecargas = File.ReadAllText(filePath);
-                lastRecargaLabel.Text = $"Última recarga:\n{allRecargas}";
-                lastRecargaLabel.IsVisible = true;
-            }
-            else
-            {
-                lastRecargaLabel.Text = "No hay recargas anteriores.";
-                lastRecargaLabel.IsVisible = false;
-            }
-        }
-
-        private void LoadAllRecargas()
-        {
-            string filePath = Path.Combine(FileSystem.AppDataDirectory, "recargas.txt");
-
-            if (File.Exists(filePath))
-            {
-                string allRecargas = File.ReadAllText(filePath);
-                lastRecargaLabel.Text = $"Historial de recargas:\n{allRecargas}";
+                string lastRecarga = File.ReadAllText(filePath);
+                lastRecargaLabel.Text = $"Última recarga:\n{lastRecarga}";
                 lastRecargaLabel.IsVisible = true;
             }
             else
@@ -71,6 +55,7 @@ namespace SantiagoPanchiExamen
         }
     }
 }
+
 
 
 
