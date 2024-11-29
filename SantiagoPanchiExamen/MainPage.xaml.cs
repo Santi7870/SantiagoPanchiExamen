@@ -1,25 +1,45 @@
-﻿namespace SantiagoPanchiExamen
+﻿using System;
+using System.IO;
+using Microsoft.Maui.Controls;
+
+namespace SantiagoPanchiExamen
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private async void OnRecargaButtonClicked(object sender, EventArgs e)
         {
-            count++;
+            string nombre = nameEntry.Text;
+            string telefono = phoneEntry.Text;
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+            if (string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(telefono))
+            {
+                await DisplayAlert("Error", "Por favor, ingrese nombre y teléfono.", "OK");
+                return;
+            }
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            // Aquí se genera el nombre del archivo basado en el nombre y apellido del usuario
+            string fileName = $"{nombre.Replace(" ", "")}.txt"; // Ejemplo: SantiagoPanchi.txt
+            string recargaInfo = $"Nombre: {nombre}\nTeléfono: {telefono}\nFecha: {DateTime.Now}";
+            string filePath = Path.Combine(FileSystem.AppDataDirectory, fileName);
+
+            // Guardar información en el archivo
+            File.WriteAllText(filePath, recargaInfo);
+
+            // Mostrar mensaje de éxito
+            await DisplayAlert("Éxito", "Recarga realizada exitosamente", "OK");
+
+            // Recargar la página
+            await Navigation.PushAsync(new MainPage());
+
+            // Mostrar última recarga
+            lastRecargaLabel.Text = $"Última recarga: {recargaInfo}";
+            lastRecargaLabel.IsVisible = true;
         }
     }
-
 }
+
