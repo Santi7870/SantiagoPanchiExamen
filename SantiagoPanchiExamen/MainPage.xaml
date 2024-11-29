@@ -29,8 +29,6 @@
                FontSize="16" 
                IsVisible="True" />
 
-        <Button Text="Ir a Página 2" 
-                Clicked="OnNavigateButtonClicked" />
     </StackLayout>
 </ContentPage>
 

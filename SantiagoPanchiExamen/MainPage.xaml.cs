@@ -59,10 +59,7 @@ namespace SantiagoPanchiExamen
                 _recargaModel.UltimaRecarga = "No hay recargas anteriores.";
             }
         }
-        private async void OnNavigateButtonClicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new SecondPage());
-        }
+
 
     }
 }

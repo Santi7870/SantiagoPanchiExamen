@@ -7,9 +7,14 @@
     Shell.FlyoutBehavior="Disabled"
     Title="SantiagoPanchiExamen">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+
+        <ShellContent Title="Recarga" Icon="icon_catalog.png" ContentTemplate="{DataTemplate local:MainPage}" />
+
+        <ShellContent Title="Nombres y apellidos" Icon="icon_user.png" ContentTemplate="{DataTemplate local:SecondPage}" />
+
+
+
+    </TabBar>
 
 </Shell>
