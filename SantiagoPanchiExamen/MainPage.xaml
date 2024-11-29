@@ -1,7 +1,13 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SantiagoPanchiExamen"
+
              x:Class="SantiagoPanchiExamen.MainPage"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <ContentPage.BindingContext>
+        <local:RecargaModel />
+    </ContentPage.BindingContext>
 
     <StackLayout Padding="20" Spacing="10">
         <Label x:Name="spanchi_label1" 
@@ -19,9 +25,9 @@
                 Clicked="OnRecargaButtonClicked" />
 
         <Label x:Name="spanchi_lastRecargaLabel" 
-               Text="Última recarga: --" 
+               Text="{Binding UltimaRecarga}" 
                FontSize="16" 
-               IsVisible="False" />
+               IsVisible="True" />
     </StackLayout>
 </ContentPage>
 

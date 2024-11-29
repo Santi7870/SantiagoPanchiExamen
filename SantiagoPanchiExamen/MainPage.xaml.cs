@@ -1,14 +1,21 @@
 ﻿using System;
 using System.IO;
 using Microsoft.Maui.Controls;
+using SantiagoPanchiExamen; 
 
 namespace SantiagoPanchiExamen
 {
     public partial class MainPage : ContentPage
     {
+        private RecargaModel _recargaModel;
+
         public MainPage()
         {
             InitializeComponent();
+
+            _recargaModel = new RecargaModel();
+
+            BindingContext = _recargaModel;
 
             LoadLastRecarga();
         }
@@ -26,36 +33,35 @@ namespace SantiagoPanchiExamen
 
             string recargaInfo = $"Nombre: {nombre}\nTeléfono: {telefono}\nFecha: {DateTime.Now}\n";
 
-            string filePath = Path.Combine(FileSystem.AppDataDirectory, "recarga.txt");
-            File.WriteAllText(filePath, recargaInfo);
+            string filePath = Path.Combine(FileSystem.AppDataDirectory, "SantiagoPanchi.txt");
+            File.WriteAllText(filePath, recargaInfo); 
 
             await DisplayAlert("Éxito", "Recarga realizada exitosamente", "OK");
 
             nameEntry.Text = string.Empty;
             phoneEntry.Text = string.Empty;
 
-            spanchi_lastRecargaLabel.Text = $"Última recarga:\n{recargaInfo}";
-            spanchi_lastRecargaLabel.IsVisible = true;
+            _recargaModel.UltimaRecarga = recargaInfo;
         }
 
         private void LoadLastRecarga()
         {
-            string filePath = Path.Combine(FileSystem.AppDataDirectory, "recarga.txt");
+            string filePath = Path.Combine(FileSystem.AppDataDirectory, "SantiagoPanchi.txt");
 
             if (File.Exists(filePath))
             {
                 string lastRecarga = File.ReadAllText(filePath);
-                spanchi_lastRecargaLabel.Text = $"Última recarga:\n{lastRecarga}";
-                spanchi_lastRecargaLabel.IsVisible = true;
+
+                _recargaModel.UltimaRecarga = lastRecarga;
             }
             else
             {
-                spanchi_lastRecargaLabel.Text = "No hay recargas anteriores.";
-                spanchi_lastRecargaLabel.IsVisible = false;
+                _recargaModel.UltimaRecarga = "No hay recargas anteriores.";
             }
         }
     }
 }
+
 
 
 
