@@ -9,6 +9,7 @@ namespace SantiagoPanchiExamen
         public MainPage()
         {
             InitializeComponent();
+
             LoadLastRecarga();
         }
 
@@ -33,8 +34,8 @@ namespace SantiagoPanchiExamen
             nameEntry.Text = string.Empty;
             phoneEntry.Text = string.Empty;
 
-            lastRecargaLabel.Text = $"Última recarga:\n{recargaInfo}";
-            lastRecargaLabel.IsVisible = true;
+            spanchi_lastRecargaLabel.Text = $"Última recarga:\n{recargaInfo}";
+            spanchi_lastRecargaLabel.IsVisible = true;
         }
 
         private void LoadLastRecarga()
@@ -44,17 +45,19 @@ namespace SantiagoPanchiExamen
             if (File.Exists(filePath))
             {
                 string lastRecarga = File.ReadAllText(filePath);
-                lastRecargaLabel.Text = $"Última recarga:\n{lastRecarga}";
-                lastRecargaLabel.IsVisible = true;
+                spanchi_lastRecargaLabel.Text = $"Última recarga:\n{lastRecarga}";
+                spanchi_lastRecargaLabel.IsVisible = true;
             }
             else
             {
-                lastRecargaLabel.Text = "No hay recargas anteriores.";
-                lastRecargaLabel.IsVisible = false;
+                spanchi_lastRecargaLabel.Text = "No hay recargas anteriores.";
+                spanchi_lastRecargaLabel.IsVisible = false;
             }
         }
     }
 }
+
+
 
 
 

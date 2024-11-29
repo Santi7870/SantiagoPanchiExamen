@@ -18,9 +18,11 @@
         <Button Text="Realizar Recarga" 
                 Clicked="OnRecargaButtonClicked" />
 
-        <Label x:Name="lastRecargaLabel" 
+        <Label x:Name="spanchi_lastRecargaLabel" 
                Text="Última recarga: --" 
                FontSize="16" 
                IsVisible="False" />
     </StackLayout>
 </ContentPage>
+
+
