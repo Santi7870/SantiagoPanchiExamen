@@ -3,17 +3,30 @@
              x:Class="SantiagoPanchiExamen.SecondPage"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
 
-    <Grid RowDefinitions="Auto,Auto"
-          ColumnDefinitions="Auto,Auto">
-        <Label Text="Primer Nombre"
-               Grid.Row="0" Grid.Column="0" />
-        <Label Text="Segundo Nombre"
-               Grid.Row="0" Grid.Column="1" />
-        <Label Text="Primer Apellido"
+    <Grid RowDefinitions="*,*"
+          ColumnDefinitions="*,*">
+
+        <Label Text="Santiago"
+               Grid.Row="0" Grid.Column="0"
+               HorizontalOptions="Center" VerticalOptions="Center" />
+
+        <Label Text="David"
+               Grid.Row="0" Grid.Column="1"
+               HorizontalOptions="Center" VerticalOptions="Center" />
+
+        <Label Text="Panchi"
                Grid.Row="1" Grid.Column="0"
-               Style="{DynamicResource ApellidoStyle}" />
-        <Label Text="Segundo Apellido"
+               Style="{DynamicResource ApellidoStyle}"
+               HorizontalOptions="Center" VerticalOptions="Center" />
+
+        <Label Text="Panchi"
                Grid.Row="1" Grid.Column="1"
-               Style="{DynamicResource ApellidoStyle}" />
+               Style="{DynamicResource ApellidoStyle}"
+               HorizontalOptions="Center" VerticalOptions="Center" />
+
     </Grid>
+
 </ContentPage>
+
+
+
